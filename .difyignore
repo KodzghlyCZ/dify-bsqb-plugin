@@ -1,0 +1,25 @@
+# Git / CI
+.git/
+.github/
+.gitignore
+
+# Python environments
+.env
+.venv/
+env/
+venv/
+ENV/
+.python-version
+
+# Build artifacts
+*.difypkg
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store

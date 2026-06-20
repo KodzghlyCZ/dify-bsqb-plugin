@@ -37,13 +37,35 @@ python -m main
 
 Install the plugin in your Dify workspace, then authorize it with your Brave Search API key.
 
-## Package
+## Package locally
 
 ```bash
-dify plugin package .
+dify-plugin-daemon plugin package . -o bsqb-0.1.0.difypkg
 ```
 
-This produces a `.difypkg` file you can upload to Dify.
+Upload the `.difypkg` via **Plugins → Install → Via Local File**.
+
+## Automated GitHub releases
+
+Push a version tag that matches `version` in `manifest.yaml`:
+
+```bash
+# 1. Bump version in manifest.yaml
+# 2. Commit and tag
+git add manifest.yaml
+git commit -m "chore: release v0.1.0"
+git tag v0.1.0
+git push origin main --tags
+```
+
+GitHub Actions (`.github/workflows/release.yml`) will:
+
+1. Verify the tag matches `manifest.yaml`
+2. Regenerate `requirements.txt`
+3. Build `bsqb-<version>.difypkg`
+4. Publish a GitHub Release with the package attached
+
+Download the `.difypkg` from the release page and install it in Dify.
 
 ## Example agent usage
 

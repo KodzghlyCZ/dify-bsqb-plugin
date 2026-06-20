@@ -12,6 +12,7 @@ ENV/
 .python-version
 
 # Build artifacts
+dify-plugin
 *.difypkg
 __pycache__/
 *.py[cod]

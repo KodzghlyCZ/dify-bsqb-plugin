@@ -39,14 +39,15 @@ jobs:
 
       - name: Install Dify plugin CLI
         run: |
-          curl -fsSL -o dify-plugin \
+          mkdir -p "$RUNNER_TEMP/bin"
+          curl -fsSL -o "$RUNNER_TEMP/bin/dify-plugin" \
             "https://github.com/langgenius/dify-plugin-daemon/releases/download/0.6.2/dify-plugin-linux-amd64"
-          chmod +x dify-plugin
-          ./dify-plugin version
+          chmod +x "$RUNNER_TEMP/bin/dify-plugin"
+          "$RUNNER_TEMP/bin/dify-plugin" version
 
       - name: Package plugin
         run: |
-          ./dify-plugin plugin package . -o "${{ steps.version.outputs.package }}"
+          "$RUNNER_TEMP/bin/dify-plugin" plugin package . -o "${{ steps.version.outputs.package }}"
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2

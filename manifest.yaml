@@ -1,4 +1,4 @@
-author: KodzghlyCZ
+author: kodzghlycz
 created_at: "2026-06-20T00:00:00.000000000Z"
 description:
   en_US: Build validated Brave Search queries with bsqb operators and run web searches from Dify agents and workflows.
@@ -15,7 +15,7 @@ meta:
     entrypoint: main
     language: python
     version: "3.12"
-  version: 0.0.1
+  version: 0.1.2
 name: bsqb
 plugins:
   tools:
@@ -28,4 +28,4 @@ resource:
 tags:
   - search
 type: plugin
-version: 0.1.1
+version: 0.1.2

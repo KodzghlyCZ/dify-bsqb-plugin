@@ -1,0 +1,31 @@
+author: kodzghly
+created_at: "2026-06-20T00:00:00.000000000Z"
+description:
+  en_US: Build validated Brave Search queries with bsqb operators and run web searches from Dify agents and workflows.
+  zh_Hans: 使用 bsqb 运算符构建经过验证的 Brave Search 查询，并在 Dify 智能体和工作流中执行网页搜索。
+icon: icon.svg
+label:
+  en_US: BSQB
+  zh_Hans: BSQB
+meta:
+  arch:
+    - amd64
+    - arm64
+  runner:
+    entrypoint: main
+    language: python
+    version: "3.12"
+  version: 0.0.1
+name: bsqb
+plugins:
+  tools:
+    - provider/bsqb.yaml
+resource:
+  memory: 1048576
+  permission:
+    tool:
+      enabled: true
+tags:
+  - search
+type: plugin
+version: 0.1.0

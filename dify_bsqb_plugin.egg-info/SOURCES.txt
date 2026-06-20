@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+dify_bsqb_plugin.egg-info/PKG-INFO
+dify_bsqb_plugin.egg-info/SOURCES.txt
+dify_bsqb_plugin.egg-info/dependency_links.txt
+dify_bsqb_plugin.egg-info/requires.txt
+dify_bsqb_plugin.egg-info/top_level.txt
+provider/bsqb.py

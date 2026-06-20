@@ -1,0 +1,79 @@
+# Dify BSQB Plugin
+
+Dify tool plugin for [bsqb](https://pypi.org/project/bsqb/) — a type-safe Brave Search query builder.
+
+Unlike the stock Brave Search plugin, this plugin lets agents and workflows build validated operator-based queries (`site:`, `filetype:`, `lang:`, exclusions, exact phrases, AND/OR/NOT) before searching.
+
+## Tools
+
+| Tool | Purpose |
+| --- | --- |
+| **Build Brave Query** | Build and validate a Brave Search `q` string with bsqb. No API call. |
+| **Brave Search (BSQB)** | Build the query with bsqb, then call the Brave Search API and return results. |
+
+## Prerequisites
+
+- Python 3.12+
+- [Dify plugin CLI](https://docs.dify.ai/en/develop-plugin/getting-started/cli) (optional, for packaging)
+- Brave Search API key from [brave.com/search/api](https://brave.com/search/api/)
+
+## Setup
+
+```bash
+cd dify-bsqb-plugin
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+cp .env.example .env
+```
+
+Edit `.env` with your Dify remote debug credentials from **Plugin Management** in Dify.
+
+## Remote debug
+
+```bash
+python -m main
+```
+
+Install the plugin in your Dify workspace, then authorize it with your Brave Search API key.
+
+## Package
+
+```bash
+dify plugin package .
+```
+
+This produces a `.difypkg` file you can upload to Dify.
+
+## Example agent usage
+
+Ask an agent to:
+
+> Find PDFs about climate change on `.edu` sites published with "2024" in the title, in English from US results.
+
+The **Brave Search (BSQB)** tool maps that to something like:
+
+```text
+climate change filetype:pdf site:edu intitle:2024 lang:en loc:us
+```
+
+## Operator parameters
+
+Both tools accept the same query-building fields:
+
+- `query` — main keywords
+- `raw_query` — skip structured fields and use a full query string
+- `phrase`, `include`, `exclude`
+- `site`, `filetype`, `ext`
+- `intitle`, `inbody`, `inpage`
+- `lang`, `loc`
+- `and_query`, `or_query`, `not_query`
+- `validate` — enforce Brave's 400 character / 50 word limits (default: true)
+
+**Brave Search (BSQB)** also accepts `count` (1–20) and `ensure_ascii`.
+
+## References
+
+- [Dify tool plugin guide](https://docs.dify.ai/en/develop-plugin/dev-guides-and-walkthroughs/tool-plugin)
+- [bsqb on PyPI](https://pypi.org/project/bsqb/)
+- [Brave Search operators](https://api-dashboard.search.brave.com/documentation/resources/search-operators)

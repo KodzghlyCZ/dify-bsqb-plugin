@@ -1,0 +1,42 @@
+identity:
+  author: kodzghly
+  name: bsqb
+  label:
+    en_US: BSQB
+    zh_Hans: BSQB
+  description:
+    en_US: Build validated Brave Search queries with bsqb and run searches via the Brave Search API.
+    zh_Hans: 使用 bsqb 构建经过验证的 Brave Search 查询，并通过 Brave Search API 执行搜索。
+  icon: icon.svg
+  tags:
+    - search
+credentials_for_provider:
+  brave_search_api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: Brave Search API key
+      zh_Hans: Brave Search API key
+    placeholder:
+      en_US: Please input your Brave Search API key
+      zh_Hans: 请输入你的 Brave Search API key
+    help:
+      en_US: Get your Brave Search API key from the Brave Search API dashboard.
+      zh_Hans: 从 Brave Search API 控制台获取 API key。
+    url: https://brave.com/search/api/
+  base_url:
+    type: text-input
+    required: false
+    default: https://api.search.brave.com/res/v1/web/search
+    label:
+      en_US: Brave Search API URL
+      zh_Hans: Brave Search API URL
+    placeholder:
+      en_US: https://api.search.brave.com/res/v1/web/search
+      zh_Hans: https://api.search.brave.com/res/v1/web/search
+tools:
+  - tools/build_query.yaml
+  - tools/brave_search.yaml
+extra:
+  python:
+    source: provider/bsqb.py

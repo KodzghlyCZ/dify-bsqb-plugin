@@ -1,0 +1,208 @@
+identity:
+  name: build_query
+  author: kodzghly
+  label:
+    en_US: Build Brave Query
+    zh_Hans: 构建 Brave 查询
+description:
+  human:
+    en_US: Build a validated Brave Search query string using bsqb search operators.
+    zh_Hans: 使用 bsqb 搜索运算符构建经过验证的 Brave Search 查询字符串。
+  llm: >
+    Builds a Brave Search `q` parameter using official search operators (site:, filetype:,
+    lang:, exclude, phrase match, AND/OR/NOT, etc.). Use this when you need a precise
+    operator-based query string. Provide `query` for main keywords and optional operator
+    fields, or pass a complete `raw_query` string instead.
+parameters:
+  - name: query
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Main search terms
+      zh_Hans: 主要搜索词
+    human_description:
+      en_US: Primary keywords for the search. Required unless raw_query is provided.
+      zh_Hans: 搜索的主要关键词。除非提供 raw_query，否则必填。
+    llm_description: Main keywords or topic to search for.
+  - name: raw_query
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Raw query override
+      zh_Hans: 原始查询覆盖
+    human_description:
+      en_US: Use a pre-built Brave Search query string instead of structured fields.
+      zh_Hans: 直接使用预先构建的 Brave Search 查询字符串。
+    llm_description: >
+      Optional full Brave Search query string. When set, other operator fields are ignored.
+  - name: phrase
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Exact phrases
+      zh_Hans: 精确短语
+    human_description:
+      en_US: Comma-separated exact phrases to match.
+      zh_Hans: 逗号分隔的精确匹配短语。
+    llm_description: Comma-separated exact phrases, e.g. "asyncio,event loop".
+  - name: include
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Required terms
+      zh_Hans: 必须包含的词
+    human_description:
+      en_US: Comma-separated terms that must appear (+term).
+      zh_Hans: 逗号分隔的必须出现的词（+term）。
+    llm_description: Comma-separated terms that must be included in results.
+  - name: exclude
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Excluded terms
+      zh_Hans: 排除的词
+    human_description:
+      en_US: Comma-separated terms or domains to exclude (-term).
+      zh_Hans: 逗号分隔的要排除的词或域名（-term）。
+    llm_description: Comma-separated terms to exclude from results.
+  - name: site
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Sites
+      zh_Hans: 站点
+    human_description:
+      en_US: Comma-separated domains to restrict results to (site:).
+      zh_Hans: 逗号分隔的限制搜索范围的域名（site:）。
+    llm_description: Comma-separated domains, e.g. "docs.python.org,github.com".
+  - name: filetype
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: File types
+      zh_Hans: 文件类型
+    human_description:
+      en_US: Comma-separated file types such as pdf or doc (filetype:).
+      zh_Hans: 逗号分隔的文件类型，例如 pdf 或 doc（filetype:）。
+    llm_description: Comma-separated file types, commonly pdf for academic sources.
+  - name: ext
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: File extensions
+      zh_Hans: 文件扩展名
+    human_description:
+      en_US: Comma-separated file extensions (ext:).
+      zh_Hans: 逗号分隔的文件扩展名（ext:）。
+    llm_description: Comma-separated file extensions.
+  - name: intitle
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: In title
+      zh_Hans: 标题中包含
+    human_description:
+      en_US: Comma-separated terms that must appear in the page title.
+      zh_Hans: 逗号分隔的必须出现在页面标题中的词。
+    llm_description: Terms that must appear in the page title (intitle:).
+  - name: inbody
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: In body
+      zh_Hans: 正文中包含
+    human_description:
+      en_US: Comma-separated terms that must appear in the page body.
+      zh_Hans: 逗号分隔的必须出现在页面正文中的词。
+    llm_description: Terms that must appear in the page body (inbody:).
+  - name: inpage
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: In page
+      zh_Hans: 页面中包含
+    human_description:
+      en_US: Comma-separated terms that must appear in title or body.
+      zh_Hans: 逗号分隔的必须出现在标题或正文中的词。
+    llm_description: Terms that must appear in title or body (inpage:).
+  - name: lang
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Language
+      zh_Hans: 语言
+    human_description:
+      en_US: ISO 639-1 language code such as en or fr (lang:).
+      zh_Hans: ISO 639-1 语言代码，例如 en 或 fr（lang:）。
+    llm_description: ISO 639-1 language code, e.g. en, de, fr.
+  - name: loc
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Country
+      zh_Hans: 国家/地区
+    human_description:
+      en_US: ISO 3166-1 alpha-2 country code such as us or gb (loc:).
+      zh_Hans: ISO 3166-1 alpha-2 国家代码，例如 us 或 gb（loc:）。
+    llm_description: ISO 3166-1 alpha-2 country code, e.g. us, gb, de.
+  - name: and_query
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: AND subquery
+      zh_Hans: AND 子查询
+    human_description:
+      en_US: Additional query combined with AND.
+      zh_Hans: 使用 AND 连接的附加查询。
+    llm_description: Secondary query combined with AND, e.g. "lang:en".
+  - name: or_query
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: OR subquery
+      zh_Hans: OR 子查询
+    human_description:
+      en_US: Alternative query combined with OR.
+      zh_Hans: 使用 OR 连接的备选查询。
+    llm_description: Alternative query combined with OR.
+  - name: not_query
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: NOT subquery
+      zh_Hans: NOT 子查询
+    human_description:
+      en_US: Query to exclude with NOT.
+      zh_Hans: 使用 NOT 排除的查询。
+    llm_description: Query to exclude with NOT, e.g. "site:example.com".
+  - name: validate
+    type: boolean
+    required: false
+    default: true
+    form: form
+    label:
+      en_US: Validate query limits
+      zh_Hans: 验证查询限制
+    human_description:
+      en_US: Enforce Brave Search 400 character and 50 word limits.
+      zh_Hans: 强制执行 Brave Search 的 400 字符和 50 词限制。
+    llm_description: Whether to validate Brave Search query limits before returning.
+extra:
+  python:
+    source: tools/build_query.py
